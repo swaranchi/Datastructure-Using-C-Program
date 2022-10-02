@@ -1,0 +1,141 @@
+Create a doubly linked list. Make sure one of the entered elements is 24.
+
+Insert a new element after the existing linked list element 24. If there are more than one occurrence of 24, give user the choice where the new element must be inserted.
+
+Sample Input/Output
+Input
+    24 19 32 45 24 39 -999
+     -56
+Output
+    2 occurrence of 24 found. Where should the insertion occur?
+Input
+    1
+Output
+    24 -56 19 32 45 24 39
+    
+Here is the code:
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct node{
+    int data;
+    struct node *next;
+    struct node *previous;
+};
+
+struct node *top;
+
+int  peek()
+{
+    int data;
+    if(top==NULL)
+    {
+        printf("\nEmpty Stack");
+    }
+    else
+    {
+        data=top->data;
+        return(data);
+    }
+return(0);
+}
+
+
+int pop()
+{
+    struct node *current,*temp;
+    int data;
+    if(top==NULL)
+    {
+        printf("\nEmpty Stack");
+    }
+    else
+    {
+        data=top->data;
+        top=top->previous;
+        return(data);
+    }
+
+return(0);
+}
+
+
+void display()
+{
+    struct node *current,*temp;
+    int data;
+    if(top==NULL)
+    {
+       printf("\nEmpty Stack");
+    }
+    else
+    {
+        for(current=top;current!=NULL;current=current->previous)
+        {
+            printf("%d ",current->data);
+        
+        }
+    }
+}
+
+
+void push(int num)
+{
+    int data,i,j,k;
+    struct node *current,*temp;
+    if(top==NULL)
+    {
+        top=(struct node *)malloc(sizeof(struct node));
+        top->data=num;
+        top->previous=NULL;
+        top->next=NULL;
+    }
+    else
+    {
+        temp=(struct node *)malloc(sizeof(struct node));
+        temp->data=num;
+        temp->previous=top;
+        temp->next=NULL;
+        top=current=temp;
+    }
+}
+
+
+int main()
+{
+    int i,j,k,num;
+    i=0;
+    top=(struct node *)malloc(sizeof(struct node));
+    top=NULL;
+    top->previous=NULL;
+    top->next=NULL;
+    while(1)
+    {
+        scanf("%d",&num);
+        if(num==-999)
+        {
+            break;
+        }
+        else
+        {
+            push(num);
+            i++;
+            continue;
+        }
+    }
+    if(i<3)
+    {
+            printf("\nInsufficient elements in stack");
+            exit(0);
+    }
+    else
+    {
+        j=peek();
+        printf("\n%d",j);
+        pop();
+        pop();
+        pop();
+        display();
+    }
+return(0);
+}
